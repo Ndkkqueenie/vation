@@ -4,5 +4,5 @@
 
 ## Install 
 *Clone this repo* <br>
-*to install dependencies: npm install or yarn install* <br>
+*to install dependencies: <b>npm install</b> or <b>yarn install</b>* <br>
 *run expo start to view with Expo account or run start to view with Android studio*
