@@ -1,64 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-import Colors from '../utils/colors';
+import { View, StyleSheet, TextInput } from 'react-native';
 
 export default function AppTextInput({
-  leftIcon,
-  width = '100%',
-  rightIcon,
-  handlePasswordVisibility,
+ handlePasswordVisibility,
   ...otherProps
 }) {
   return (
-    <View style={[styles.container, { width }]}>
-      {leftIcon && (
-        <MaterialCommunityIcons
-          name={leftIcon}
-          size={20}
-          color={Colors.mediumGrey}
-          style={styles.icon}
-        />
-      )}
+    <View>
+      
       <TextInput
         style={styles.input}
-        placeholderTextColor={Colors.mediumGrey}
         {...otherProps}
       />
-      {rightIcon && (
-        <TouchableOpacity onPress={handlePasswordVisibility}>
-          <MaterialCommunityIcons
-            name={rightIcon}
-            size={20}
-            color={Colors.mediumGrey}
-            style={styles.rightIconStyles}
-          />
-        </TouchableOpacity>
-      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.lightGrey,
-    borderRadius: 25,
-    flexDirection: 'row',
-    padding: 15,
-    marginVertical: 10
-  },
-  icon: {
-    marginRight: 10
-  },
+  /* custom css for login page implemented accordingly*/
   input: {
-    width: '100%',
-    fontSize: 18,
-    color: Colors.black
-  },
-  rightIconStyles: {
-    position: 'absolute',
-    right: 30,
-    alignSelf: 'center'
+    backgroundColor: 'rgba(142, 142, 147, 0.28)',
+    display: 'flex',
+    paddingTop: 10,
+    height: 45,
+    paddingLeft: 12,
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 8,
+    borderRadius: 40
   }
 });
+

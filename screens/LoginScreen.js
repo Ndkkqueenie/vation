@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import * as Yup from 'yup';
-
-import Colors from '../utils/colors';
+import {LinearGradient} from 'expo-linear-gradient';
 import SafeView from '../components/SafeView';
 import Form from '../components/Forms/Form';
 import FormField from '../components/Forms/FormField';
@@ -51,15 +50,47 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <SafeView style={styles.container}>
-      <Form
+    <SafeView style={styles.xcontainer}>
+      <View>
+      
+      <View>
+        <LinearGradient
+          // Top Background Linear Gradient
+          colors={['#858da6', '#858da6', '#858da6', '#858da6', '#000000']}
+          style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          top: -25,
+          height: 200,
+          }}
+        />
+        <IconButton
+          style={styles.backButton}
+          iconName="keyboard-backspace"
+          color="#fff"
+          size={30}
+          onPress={() => navigation.goBack()}
+        />
+        <Text style={styles.text}>•<Text style={{color: '#858da6'}}> • •</Text></Text>
+      </View>
+
+      <View style={styles.container}>
+
+        <View>
+          <Text style={styles.headerText}>Welcome Back</Text>
+          <Text style={styles.textLogin}>Login to your account</Text>
+        </View>
+
+        <View style={styles.inputView}>
+        <Form
         initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}
         onSubmit={values => handleOnLogin(values)}
       >
         <FormField
           name="email"
-          leftIcon="email"
           placeholder="Enter email"
           autoCapitalize="none"
           keyboardType="email-address"
@@ -68,51 +99,116 @@ export default function LoginScreen({ navigation }) {
         />
         <FormField
           name="password"
-          leftIcon="lock"
           placeholder="Enter password"
           autoCapitalize="none"
           autoCorrect={false}
           secureTextEntry={passwordVisibility}
           textContentType="password"
-          rightIcon={rightIcon}
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <FormButton title={'Login'} />
         {<FormErrorMessage error={loginError} visible={true} />}
       </Form>
-      <View style={styles.footerButtonContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text style={styles.forgotPasswordButtonText}>Forgot Password?</Text>
-        </TouchableOpacity>
+        </View>
+
+        <View>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate('ForgotPassword')}
+          >
+            <Text style={styles.textForgetPwd}>Forgot your password?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate('Register')}
+          >
+            <Text style={styles.textSignup}>Don't have an account? <Text style={{color: '#6C9DFE'}}> Sign up</Text></Text>
+          </TouchableOpacity>
+          <Text style={styles.line}>________</Text>
+        </View>
+
       </View>
-      <IconButton
-        style={styles.backButton}
-        iconName="keyboard-backspace"
-        color="#fff"
-        size={30}
-        onPress={() => navigation.goBack()}
-      />
+
+    </View>
     </SafeView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-    backgroundColor: Colors.mediumGrey
-  },
-  footerButtonContainer: {
-    marginVertical: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  forgotPasswordButtonText: {
-    color: Colors.white,
-    fontSize: 18,
-    fontWeight: '600'
-  },
+  /* custom css for login page implemented accordingly*/
   backButton: {
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginTop: 10,
+    height: 10,
+    marginLeft: 20,
+    color: 'white'
+  },
+  text: {
+    color: 'white',
+    fontSize: 40,
+    top: 60,
+    bottom: 0,
+    textAlign: 'center',
+    marginBottom: 100,
+    marginTop: 40
+  },
+  container: {
+    borderRadius: 20,
+    backgroundColor: 'white',
+    height: 500,
+    top: -50,
+    bottom: 0,
+  },
+  headerText: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 31,
+    lineHeight: 34,
+    color: '#0A1F44',
+  },
+  textLogin: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontWeight: 'normal',
+    fontSize: 15,
+    lineHeight: 18,
+    color: 'rgba(0, 0, 0, 0.4)'
+  },
+  inputView: {
+    marginTop: 15,
+  },
+  navButton: {
+    marginTop: 20
+  },
+  textForgetPwd: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 16,
+    color: '#000000'
+  },
+  textSignup: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 16,
+    color: '#B8BBC6'
+  },
+  line: {
+    textAlign: 'center',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: 'black',
+    marginTop: 0,
+    bottom: 9,
+    marginBottom: 4,
   }
 });

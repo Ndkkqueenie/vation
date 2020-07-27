@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import * as Yup from 'yup';
-
-import Colors from '../utils/colors';
 import SafeView from '../components/SafeView';
 import Form from '../components/Forms/Form';
 import FormField from '../components/Forms/FormField';
@@ -36,7 +34,23 @@ export default function ForgotPasswordScreen({ navigation }) {
   }
 
   return (
-    <SafeView style={styles.container}>
+    <SafeView >
+      <View>
+        <IconButton
+          style={styles.backButton}
+          iconName="keyboard-backspace"
+          color='black'
+          size={30}
+          onPress={() => navigation.goBack()}
+        />
+      </View>
+      <View>
+        <Image
+          style={styles.imageOne}
+          source={require('../assets/icon.png')} 
+        />
+      </View>
+      <View style={styles.container}>
       <Form
         initialValues={{ email: '' }}
         validationSchema={validationSchema}
@@ -54,13 +68,7 @@ export default function ForgotPasswordScreen({ navigation }) {
         <FormButton title="Forgot Password" />
         {<FormErrorMessage error={customError} visible={true} />}
       </Form>
-      <IconButton
-        style={styles.backButton}
-        iconName="keyboard-backspace"
-        color={Colors.white}
-        size={30}
-        onPress={() => navigation.goBack()}
-      />
+      </View>
     </SafeView>
   );
 }
@@ -68,11 +76,17 @@ export default function ForgotPasswordScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    backgroundColor: Colors.mediumGrey
+  },
+  imageOne: {
+    height: 78,
+    width: 109,
+    marginLeft: 100,
+    marginTop: 80
   },
   backButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 10
-  }
+    marginTop: 10,
+    height: 15,
+    marginLeft: 20,
+    color: 'white'
+  },
 });
